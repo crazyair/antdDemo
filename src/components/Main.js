@@ -45,9 +45,18 @@ class AppComponent extends React.Component {
     ];
     return (
       <div>
+        currentSituation
         <Table columns={columns}
                rowKey={(record, index) => index}
                dataSource={[]}
+               size="middle"
+               scroll={{x: 5000}}
+               bordered
+        />
+        expectation
+        <Table columns={columns}
+               rowKey={(record, index) => index}
+               dataSource={[{}]}
                size="middle"
                scroll={{x: 5000}}
                bordered
