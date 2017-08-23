@@ -62,7 +62,7 @@
         "webpack-dev-server": "^1.12.0"
     },
     "dependencies": {
-        "antd": "^2.10.2",
+        "antd": "^2.12.7",
         "babel-plugin-import": "^1.1.1",
         "core-js": "^2.0.0",
         "less-loader": "^4.0.3",

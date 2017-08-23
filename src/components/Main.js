@@ -3,117 +3,61 @@ require('styles/App.less');
 
 import React from 'react';
 import {withRouter} from 'react-router'
-import {Tabs,Table,Icon,Popconfirm,message,Row,Col,Button,Steps,Form,Cascader,Input} from 'antd'
+import {Tabs, Table, Icon, Popconfirm, message, Row, Col, Button, Steps, Form, Cascader, Input} from 'antd'
+
 const FormItem = Form.Item;
-let yeomanImage = require('../images/yeoman.png');
 
 class AppComponent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {}
   }
-  handleSubmit(e) {
-    e.preventDefault();
-    let nextPath = '';
-    const {step} = this.props.router.params;
-    if (step == 0) {
-      nextPath = 1;
-    }
-    return this.props.router.push(`/demo/${nextPath}`);
-  }
+
   render() {
-    const {step} = this.props.router.params;
-    const props = {
-      ...this.props
-    };
+    const columns = [
+      {title: 'test', dataIndex: 'test1', width: 100, fixed: 'left'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test2', width: 100, fixed: 'left'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test3'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test4'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test5'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test6'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test7'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test8'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test9'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test10'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test11'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test12'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test13'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test14'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test15'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test16'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test17'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test18'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test19'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test20'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test21'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test22'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test23'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test24'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test25'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test26'},
+      {title: 'testtesttesttesttesttesttest', dataIndex: 'test27', width: 100, fixed: 'right'},
+    ];
     return (
-      <div >
-        <Form onSubmit={this.handleSubmit.bind(this)}>
-          {step == 0 && <SelectDemo {...props}/>}
-          {step == 1 && <SelectDemo2 {...props}/>}
-        </Form>
+      <div>
+        <Table columns={columns}
+               rowKey={(record, index) => index}
+               dataSource={[]}
+               size="middle"
+               scroll={{x: 5000}}
+               bordered
+        />
       </div>
-    );
+    )
   }
 }
-
-
-class SelectDemo extends React.Component {
-  constructor(props) {
-      super(props);
-      this.state = {}
-  }
-
-  render() {
-      const {form: {getFieldDecorator, getFieldValue}} = this.props;
-      const options = [{
-        value: 'zhejiang',
-        label: 'Zhejiang',
-        children: [{
-          value: 'hangzhou',
-          label: 'Hangzhou'
-        }],
-      }, {
-        value: 'jiangsu',
-        label: 'Jiangsu',
-        children: [{
-          value: 'nanjing',
-          label: 'Nanjing'
-        }],
-      }];
-      
-      return (
-          <div>
-              <FormItem label="选择">
-                  {getFieldDecorator("demoitem", {
-                      rules: [{required: true, message: "请选择"}],
-                  })(
-                      <Cascader options={options} placeholder="请选择" showSearch/>
-                  )}
-              </FormItem>
-              <FormItem  >
-              <Button size="large" type="primary" htmlType="submit">下一步</Button>
-          </FormItem>
-          </div>
-      );
-  }
-}
-
-
-
-class SelectDemo2 extends React.Component {
-  constructor(props) {
-      super(props);
-      this.state = {}
-  }
-
-  render() {
-      const {form: {getFieldDecorator, getFieldValue}} = this.props;
-      return (
-          <div>
-              <FormItem label="选择">
-                  {getFieldDecorator("demoitem2", {
-                      rules: [{required: true, message: "请选择"}],
-                  })(
-                      <Input />
-                  )}
-              </FormItem>
-              <FormItem  >
-              <Button size="large" onClick={() => this.props.router.push('/demo/0')} style={{marginRight: '15px'}}>上一步</Button>
-              <Button size="large" type="primary" htmlType="submit">下一步</Button>
-          </FormItem>
-          </div>
-      );
-  }
-}
-
-
-
-
-
 
 AppComponent = withRouter(AppComponent);
 AppComponent = Form.create({})(AppComponent);
-AppComponent.defaultProps = {};
 
 export default AppComponent;
