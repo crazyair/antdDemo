@@ -4,7 +4,7 @@ require('styles/App.less');
 import React from 'react';
 import {withRouter} from 'react-router'
 import {Tabs, Table, Icon, Popconfirm, message, Row, Col, Button, Steps, Form, Cascader, Input} from 'antd'
-
+import Moment from 'moment';
 const FormItem = Form.Item;
 
 class AppComponent extends React.Component {
@@ -17,8 +17,16 @@ class AppComponent extends React.Component {
     const columns = [
       {title: 'test', dataIndex: 'test1', width: 100, fixed: 'left'},
       {title: 'testtesttesttesttesttesttest', dataIndex: 'test2', width: 100, fixed: 'left'},
-      {title: 'testtesttesttesttesttesttest', dataIndex: 'test3'},
-      {title: 'testtesttesttesttesttesttest', dataIndex: 'test4'},
+      {
+        title: 'created_time', dataIndex: 'created_time', render: (text, record) => (
+        <span>{Moment.unix(text).format("YYYY-MM-DD HH:mm:ss")}</span>
+      )
+      },
+      {
+        title: 'testtesttesttesttesttesttest', dataIndex: 'test4', render: (text, record) => (
+        <span>{text ? text : '-/-'}</span>
+      )
+      },
       {title: 'testtesttesttesttesttesttest', dataIndex: 'test5'},
       {title: 'testtesttesttesttesttesttest', dataIndex: 'test6'},
       {title: 'testtesttesttesttesttesttest', dataIndex: 'test7'},
@@ -54,6 +62,14 @@ class AppComponent extends React.Component {
                bordered
         />
         expectation
+        <Table columns={columns.slice(2, 5)}
+               rowKey={(record, index) => index}
+               dataSource={[]}
+               size="middle"
+               scroll={{x: 5000}}
+               bordered
+        />
+        no expectation
         <Table columns={columns}
                rowKey={(record, index) => index}
                dataSource={[{}]}
