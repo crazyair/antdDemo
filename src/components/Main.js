@@ -5,6 +5,7 @@ import React from 'react';
 import {withRouter} from 'react-router'
 import {Tabs, Table, Icon, Popconfirm, message, Row, Col, Button, Steps, Form, Cascader, Input} from 'antd'
 import Moment from 'moment';
+
 const FormItem = Form.Item;
 
 class AppComponent extends React.Component {
@@ -14,6 +15,7 @@ class AppComponent extends React.Component {
   }
 
   render() {
+    const {changeShow} = this.state;
     const columns = [
       {title: 'test', dataIndex: 'test1', width: 100, fixed: 'left'},
       {title: 'testtesttesttesttesttesttest', dataIndex: 'test2', width: 100, fixed: 'left'},
@@ -53,30 +55,29 @@ class AppComponent extends React.Component {
     ];
     return (
       <div>
+        <Button onClick={() => this.setState({changeShow: true})}>显示报错的Table</Button>
+        <br/>
         currentSituation
         <Table columns={columns}
-               rowKey={(record, index) => index}
+               rowKey={record => record.key}
                dataSource={[]}
                size="middle"
                scroll={{x: 5000}}
                bordered
         />
-        expectation
-        <Table columns={columns.slice(2, 5)}
-               rowKey={(record, index) => index}
-               dataSource={[]}
-               size="middle"
-               scroll={{x: 5000}}
-               bordered
-        />
-        no expectation
-        <Table columns={columns}
-               rowKey={(record, index) => index}
-               dataSource={[{}]}
-               size="middle"
-               scroll={{x: 5000}}
-               bordered
-        />
+        当是 key 的时候不会报错
+        {changeShow && <div>
+          expectation
+          <Table columns={columns}
+                 rowKey={record => record.keys}
+                 dataSource={[]}
+                 size="middle"
+                 scroll={{x: 5000}}
+                 bordered
+          />
+          当不是 key 的时候会报错
+        </div>
+        }
       </div>
     )
   }
