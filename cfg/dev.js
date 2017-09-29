@@ -10,8 +10,9 @@ let BowerWebpackPlugin = require('bower-webpack-plugin');
 
 let config = Object.assign({}, baseConfig, {
   entry: [
-    'webpack-dev-server/client?http://127.0.0.1:' + defaultSettings.port,
-    'webpack/hot/only-dev-server',
+    // 'webpack-dev-server/client?http://127.0.0.1:' + defaultSettings.port,
+    // 'webpack/hot/only-dev-server',
+    'react-hot-loader/patch',
     './src/index'
   ],
   cache: true,
@@ -29,7 +30,7 @@ let config = Object.assign({}, baseConfig, {
 // Add needed loaders to the defaults here
 config.module.loaders.push({
   test: /\.(js|jsx)$/,
-  loader: 'react-hot!babel-loader',
+  loaders: ['react-hot-loader/webpack', 'babel'],
   include: [].concat(
     config.additionalPaths,
     [ path.join(__dirname, '/../src') ]
